@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:11:26 by aabdou            #+#    #+#             */
-/*   Updated: 2022/03/27 19:44:58 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/03/28 18:17:16 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
 typedef struct mutex
 {
     pthread_mutex_t *forks;
-    pthread_mutex_t *output;
+    pthread_mutex_t output;
 } t_mutex;
 
 typedef struct data
@@ -32,7 +32,6 @@ typedef struct data
 	int time_to_eat;	
 	int time_to_sleep;
 	int nb_of_meals;
-	t_mutex fork;
 }   t_data;
 
 typedef struct philo
@@ -44,8 +43,8 @@ typedef struct philo
 	t_data *args;
 	t_mutex *mutex;
 	pthread_t thread;
-	pthread_mutex_t right_fork;
-	pthread_mutex_t left_fork;
+	pthread_mutex_t *right_fork;
+	pthread_mutex_t *left_fork;
 }	t_philo;
 
 typedef struct all

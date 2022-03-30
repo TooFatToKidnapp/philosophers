@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:16:55 by aabdou            #+#    #+#             */
-/*   Updated: 2022/03/28 18:17:24 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/03/30 21:48:55 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,8 +82,12 @@ int main(int ac, char**av)
 		return(0);
     if(init_philo(&info))
 		return (0);
+    if (thread(&info))
+        return (0);
 
     printf("%d  %d  %d   %d  %d\n", info.data->nb_of_philo ,info.data->time_to_die ,info.data->time_to_eat ,
          info.data->time_to_sleep,info.data->nb_of_meals );
 
 }
+
+

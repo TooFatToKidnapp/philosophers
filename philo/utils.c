@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:42:40 by aabdou            #+#    #+#             */
-/*   Updated: 2022/03/26 22:19:40 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/03/30 21:54:31 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,4 +76,14 @@ int	ft_isdigit(int c)
 		return (1);
 	else
 		return (0);
+}
+
+long	get_time(void)
+{
+	struct timeval	time;
+	long			res;
+
+	gettimeofday(&time, NULL);
+	res = time.tv_sec * 1000 + time.tv_usec / 1000;
+	return (res);
 }

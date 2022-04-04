@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 20:15:37 by aabdou            #+#    #+#             */
-/*   Updated: 2022/04/02 19:33:09 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/04/04 21:12:12 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 void	destroy_mutex(t_all *all)
 {
-	int i;
+	int	i;
 
 	i = 0;
-	while (i<  all->data->nb_of_philo)
+	while (i < all->data->nb_of_philo)
 		pthread_mutex_destroy(&all->lock->forks[i++]);
 	pthread_mutex_destroy(&all->lock->output);
 }
@@ -27,10 +27,11 @@ int	if_dead(t_philo *philo)
 	long	hunger_time;
 
 	hunger_time = get_time() - philo->last_meal;
-	if(philo->args->time_to_die < hunger_time)
+	if (philo->args->time_to_die < hunger_time)
 	{
 		pthread_mutex_lock(&philo->mutex->output);
-		printf("%ld\t The philo %d id dead\n", get_time() - philo->start_time, philo->philo_id);
+		printf("%ld\tThe philo %d id dead\n", get_time() - philo->start_time,
+			philo->philo_id);
 		philo->args->flag = 1;
 		return (0);
 	}
@@ -43,8 +44,8 @@ void	*check_death(void *info)
 	int		i;
 	int		meals_count;
 
-	all = (t_all*)info;
-	while(1)
+	all = (t_all *)info;
+	while (1)
 	{
 		i = 0;
 		meals_count = 0;

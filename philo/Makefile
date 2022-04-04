@@ -6,11 +6,11 @@
 #    By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 14:13:27 by aabdou            #+#    #+#              #
-#    Updated: 2022/04/03 17:53:45 by aabdou           ###   ########.fr        #
+#    Updated: 2022/04/04 02:20:24 by aabdou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philosophers
+NAME = philo
 
 HEADER = philosophers.h
 
@@ -29,7 +29,7 @@ OBJ = $(SRC:%.c=%.o)
 all: $(NAME)
 
 $(NAME) : $(OBJ) $(HEADER)
-	$(CC) $(FLAGS) $(OBJ) -o philo
+	$(CC) $(FLAGS) $(OBJ) -o $(NAME)
 
 clean:
 	@rm -f *.o

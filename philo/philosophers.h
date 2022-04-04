@@ -6,20 +6,20 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:11:26 by aabdou            #+#    #+#             */
-/*   Updated: 2022/04/02 19:30:39 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/04/04 21:12:18 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
-#define PHILOSOPHERS_H
+# define PHILOSOPHERS_H
 
-#include<pthread.h>
-#include<stdio.h>
-#include<unistd.h>
-#include<stdlib.h>
-#include<stdbool.h>
-#include<time.h>
-#include <sys/time.h>
+# include<pthread.h>
+# include<stdio.h>
+# include<unistd.h>
+# include<stdlib.h>
+# include<stdbool.h>
+# include<time.h>
+# include <sys/time.h>
 
 typedef struct mutex
 {
@@ -60,13 +60,12 @@ typedef struct all
 }				t_all;
 
 long	get_time(void);
-int		 eating(t_philo *philo);
+int		eating(t_philo *philo);
 void	is_sleep(long wait_time);
 int		thread(t_all *info);
 void	destroy_mutex(t_all *all);
 void	output(t_philo *philo, char *str);
 void	*check_death(void *info);
-
 
 int		ft_atoi(const char *str);
 int		ft_isdigit(int c);

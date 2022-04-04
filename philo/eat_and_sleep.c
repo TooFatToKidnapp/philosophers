@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/30 22:02:12 by aabdou            #+#    #+#             */
-/*   Updated: 2022/04/03 17:52:14 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/04/04 21:11:56 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ void	output(t_philo *philo, char *str)
 {
 	pthread_mutex_lock(&philo->mutex->output);
 	if (philo->args->flag == 1)
-		return;
+		return ;
 	else if (philo->args->flag == 0)
 	{
 		printf("%ld\tThe philo %d %s\n", get_time()

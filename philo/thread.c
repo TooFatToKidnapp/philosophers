@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 20:05:41 by aabdou            #+#    #+#             */
-/*   Updated: 2022/04/03 17:51:14 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/04/04 21:11:48 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	free_and_destroy(t_all *all)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < all->data->nb_of_philo)
@@ -30,16 +30,16 @@ void	free_and_destroy(t_all *all)
 	free(all->philo);
 }
 
-void *start(void *philo)
+void	*start(void *philo)
 {
-	t_philo *data;
+	t_philo	*data;
 
 	data = (t_philo *)philo;
 	data->last_meal = get_time();
 	pthread_detach(data->thread);
 	while (1)
 	{
-		if(data->eat_count != 0)
+		if (data->eat_count != 0)
 		{
 			eating(data);
 			data->last_meal = get_time();
@@ -52,14 +52,14 @@ void *start(void *philo)
 			output(data, "is thinking");
 		}
 		else
-			break;
+			break ;
 	}
 	return (NULL);
 }
 
-int make_thread(t_all *info, int flag, int i)
+int	make_thread(t_all *info, int flag, int i)
 {
-	if(info->philo[i].philo_id % 2 == flag)
+	if (info->philo[i].philo_id % 2 == flag)
 	{
 		info->philo[i].start_time = info->data->time;
 		info->philo[i].mutex = malloc(sizeof(t_mutex));
@@ -70,7 +70,8 @@ int make_thread(t_all *info, int flag, int i)
 			free(info->lock->forks);
 			return (put_err("Memory is not allocated", false));
 		}
-		if (pthread_create(&info->philo[i].thread, NULL, &start, &info->philo[i]) != 0)
+		if (pthread_create(&info->philo[i].thread, NULL,
+				&start, &info->philo[i]) != 0)
 		{
 			destroy_mutex(info);
 			free(info->lock);
@@ -82,9 +83,9 @@ int make_thread(t_all *info, int flag, int i)
 	return (0);
 }
 
-int thread(t_all *info)
+int	thread(t_all *info)
 {
-	int i;
+	int	i;
 
 	i = -1;
 	info->data->time = get_time();

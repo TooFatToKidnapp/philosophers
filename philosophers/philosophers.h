@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:11:26 by aabdou            #+#    #+#             */
-/*   Updated: 2022/04/05 21:05:26 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/04/07 01:18:02 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,16 +20,16 @@
 # include<stdbool.h>
 # include<time.h>
 # include <sys/time.h>
-# include <semaphore.h>
 
-typedef struct sema
+typedef struct mutex
 {
-	sem_t	*output;
-	sem_t	*forks;
-}					t_sema;
+	pthread_mutex_t	output;
+	pthread_mutex_t	*forks;
+}					t_mutex;
 
 typedef struct data
 {
+	long	time;
 	int		flag;
 	int		nb_of_philo;
 	int		time_to_die;
@@ -45,13 +45,16 @@ typedef struct philo
 	long			start_time;
 	long			last_meal;
 	t_data			*args;
-	t_sema			*sems;
-	pid_t			*pid;
+	t_mutex			*mutex;
+	pthread_t		thread;
+	pthread_mutex_t	*right_fork;
+	pthread_mutex_t	*left_fork;
 }					t_philo;
 
 typedef struct all
 {
-	t_sema		*lock;
+	pthread_t	death;
+	t_mutex		*lock;
 	t_philo		*philo;
 	t_data		*data;
 }				t_all;
@@ -71,9 +74,9 @@ int		parsing_arg(char **av);
 
 int		make_thread(t_all *info, int flag, int i);
 int		init_mutex(t_all *info);
-int		init_philo(t_all *info);
 int		if_dead(t_philo *philo);
 void	*start(void *philo);
 void	free_and_destroy(t_all *all);
+int		init_philo(t_all *info);
 
 #endif

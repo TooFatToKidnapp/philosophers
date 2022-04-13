@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 20:51:04 by aabdou            #+#    #+#             */
-/*   Updated: 2022/04/12 15:03:00 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/04/13 13:12:42 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	is_sleep(long wait_time)
 void	output(t_philo *philo, char *str)
 {
 	sem_wait(philo->sems->output);
-	if (philo->args->flag == 0)
+	if (philo->args->death_flag == 0)
 		printf("%ld\tThe philo %d %s\n", get_time() - philo->start_time, \
 		philo->philo_id, str);
 	sem_post(philo->sems->output);

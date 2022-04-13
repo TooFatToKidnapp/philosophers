@@ -6,35 +6,35 @@
 #    By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/03/31 14:13:27 by aabdou            #+#    #+#              #
-#    Updated: 2022/04/11 15:53:51 by aabdou           ###   ########.fr        #
+#    Updated: 2022/04/13 13:19:24 by aabdou           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philo
+NAME = philosophers
 
-NAME_BONUS = philo_bonus
+NAME_BONUS = philosophers_bonus
 
-HEADER = philosophers/philosophers.h
+HEADER = philo/philosophers.h
 
-HEADER_B = philosophers_bonus/philosophers_bonus.h
+HEADER_B = philo_bonus/philosophers_bonus.h
 
 CC = gcc
 
 FLAGS = -Wall -Wextra -Werror
 
-SRC =	philosophers/death.c\
-		philosophers/eat_and_sleep.c\
-		philosophers/philosophers.c\
-		philosophers/thread.c\
-		philosophers/utils.c\
-		philosophers/main.c\
+SRC =	philo/death.c\
+		philo/eat_and_sleep.c\
+		philo/philosophers.c\
+		philo/thread.c\
+		philo/utils.c\
+		philo/main.c\
 
-SRC_B =	philosophers_bonus/death_bonus.c\
-		philosophers_bonus/main_bonus.c\
-		philosophers_bonus/philosophers_bonus.c\
-		philosophers_bonus/processes_bonus.c\
-		philosophers_bonus/sleep_and_eat_bonus.c\
-		philosophers_bonus/util_bonus.c\
+SRC_B =	philo_bonus/death_bonus.c\
+		philo_bonus/main_bonus.c\
+		philo_bonus/philosophers_bonus.c\
+		philo_bonus/processes_bonus.c\
+		philo_bonus/sleep_and_eat_bonus.c\
+		philo_bonus/util_bonus.c\
 
 OBJ = $(SRC:%.c=%.o)
 
@@ -51,9 +51,9 @@ $(NAME_BONUS) : $(OBJ_B) $(HEADER_B)
 	$(CC) $(FLAGS) $(OBJ_B) -o $(NAME_BONUS)
 
 clean:
-	@rm -f philosophers/*.o philosophers_bonus/*.o
+	@rm -f philo/*.o philo_bonus/*.o
 
 fclean: clean
-	@rm -f philo philo_bonus
+	@rm -f philosophers philosophers_bonus
 
 re: fclean all

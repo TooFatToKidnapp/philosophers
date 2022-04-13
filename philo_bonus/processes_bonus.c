@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/05 20:50:59 by aabdou            #+#    #+#             */
-/*   Updated: 2022/04/12 15:59:16 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/04/13 13:13:50 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,26 +23,26 @@ void	free_all(t_all *all)
 	free(all->philo);
 }
 
-void	start_act(t_philo *philo)
+void	start_act(t_philo *phil)
 {
-	pthread_t	flag;
+	pthread_t	dead_flag;
 
-	philo->start_time = get_time();
-	philo->last_meal = get_time();
-	pthread_create(&flag, NULL, check_death, (void *)philo);
-	pthread_detach(flag);
+	phil->start_time = get_time();
+	phil->last_meal = get_time();
+	pthread_create(&dead_flag, NULL, check_death, (void *)phil);
+	pthread_detach(dead_flag);
 	while (1)
 	{
-		if (philo->eat_count != 0)
+		if (phil->eat_count != 0)
 		{
-			eating(philo);
-			philo->eat_count--;
-			output(philo, "is sleaping");
-			sleep(philo->args->time_to_sleep);
-			output(philo, "is thinking");
+			eating(phil);
+			phil->eat_count--;
+			output(phil, "is sleeping");
+			is_sleep(phil->args->time_to_sleep);
+			output(phil, "is thinking");
 		}
 		else
-			exit(0);
+			exit (0);
 	}
 }
 
@@ -83,7 +83,7 @@ int	init_process(t_all *all)
 			start_act(all->philo);
 		}
 		else if (all->philo->pid[i] == -1)
-			return (put_err("Can't creat a process\n", false));
+			return (put_err("Can't create a process\n", 0));
 		i++;
 	}
 	wait_loop(all);

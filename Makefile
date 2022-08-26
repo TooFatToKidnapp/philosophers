@@ -20,7 +20,7 @@ HEADER_B = philo_bonus/philosophers_bonus.h
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra -Werror -pthread #-g -fsanitize=thread
 
 SRC =	philo/death.c\
 		philo/eat_and_sleep.c\
@@ -39,6 +39,12 @@ SRC_B =	philo_bonus/death_bonus.c\
 OBJ = $(SRC:%.c=%.o)
 
 OBJ_B = $(SRC_B:%.c=%.o)
+
+%.o : %.c $(HEADER)
+	$(CC) $(FLAGS) -o $@ -c $<
+	
+%.o : %.c $(HEADER_B)
+	$(CC) $(FLAGS) -o $@ -c $<
 
 all: $(NAME)
 

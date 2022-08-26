@@ -22,6 +22,8 @@
 # include <semaphore.h>
 # include <signal.h>
 # include <sys/time.h>
+# include <fcntl.h>
+# include <sys/wait.h>
 
 typedef struct sema
 {

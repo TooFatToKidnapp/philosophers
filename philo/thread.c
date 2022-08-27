@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 20:05:41 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/27 17:50:54 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/27 18:34:56 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,14 +19,20 @@ void	free_and_destroy(t_all *all)
 	i = 0;
 	while (i < all->data->nb_of_philo)
 	{
-		
+
 		pthread_mutex_destroy(all->philo[i].left_fork);
 		pthread_mutex_destroy(all->philo[i].right_fork);
 		free(all->philo[i].mutex);
 		i++;
 	}
 	pthread_mutex_destroy(&all->lock->output);
+	pthread_mutex_destroy(all->philo->last_meal_lock);
+	pthread_mutex_destroy(all->philo->flag_lock);
+	pthread_mutex_destroy(all->philo->eat_count_lock);
 	free(all->lock->forks);
+	free(all->philo->eat_count_lock);
+	free(all->philo->flag_lock);
+	free(all->philo->last_meal_lock);
 	free(all->lock);
 	free(all->philo);
 }

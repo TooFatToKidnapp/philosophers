@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 01:16:06 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/27 12:45:36 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/27 18:40:03 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,9 +31,10 @@ int	main(int ac, char**av)
 	if (av[5] != NULL)
 		info.data->nb_of_meals = ft_atoi(av[5]);
 	if (init_mutex(&info))
-		return (0);
+		return (free_and_destroy(&info), 1);
 	if (init_philo(&info))
-		return (0);
+		return (free_and_destroy(&info), 1);
 	if (thread(&info))
-		return (0);
+		return (free_and_destroy(&info), 1);
+	return (0);
 }

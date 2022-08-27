@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:11:26 by aabdou            #+#    #+#             */
-/*   Updated: 2022/08/27 13:06:58 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/27 17:48:32 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,5 +81,6 @@ int		if_dead(t_philo *philo);
 void	*start(void *philo);
 void	free_and_destroy(t_all *all);
 int		init_philo(t_all *info);
+int		init_locks(t_philo *philo);
 
 #endif

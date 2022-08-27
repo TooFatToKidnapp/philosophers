@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 20:15:37 by aabdou            #+#    #+#             */
-/*   Updated: 2022/04/04 21:12:12 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/27 13:15:41 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,13 +26,17 @@ int	if_dead(t_philo *philo)
 {
 	long	hunger_time;
 
-	hunger_time = get_time() - philo->last_meal;
+	hunger_time = 0;
+	if (pthread_mutex_lock(philo->last_meal_lock) == 0)
+		hunger_time = get_time() - philo->last_meal;
+	pthread_mutex_unlock(philo->last_meal_lock);
 	if (philo->args->time_to_die < hunger_time)
 	{
 		pthread_mutex_lock(&philo->mutex->output);
 		printf("%ld\tThe philo %d id dead\n", get_time() - philo->start_time,
 			philo->philo_id);
-		philo->args->flag = 1;
+		if (pthread_mutex_lock(philo->flag_lock) != 0)
+			philo->args->flag = 1;
 		return (0);
 	}
 	return (1);
@@ -53,7 +57,9 @@ void	*check_death(void *info)
 		{
 			if (!if_dead(&all->philo[i]))
 				return (NULL);
-			meals_count += all->philo[i].eat_count;
+			if (pthread_mutex_lock(all->philo[i].eat_count_lock) == 0)
+				meals_count += all->philo[i].eat_count;
+			pthread_mutex_unlock(all->philo[i].eat_count_lock);
 			i++;
 		}
 		if (meals_count == 0)

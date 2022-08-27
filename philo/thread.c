@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/29 20:05:41 by aabdou            #+#    #+#             */
-/*   Updated: 2022/04/04 21:11:48 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/27 13:15:07 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,9 @@ void	*start(void *philo)
 	t_philo	*data;
 
 	data = (t_philo *)philo;
-	data->last_meal = get_time();
+	if (pthread_mutex_lock(data->last_meal_lock) == 0)
+		data->last_meal = get_time();
+	pthread_mutex_unlock(data->last_meal_lock);
 	pthread_detach(data->thread);
 	while (1)
 	{
@@ -43,7 +45,9 @@ void	*start(void *philo)
 		{
 			eating(data);
 			data->last_meal = get_time();
-			data->eat_count--;
+			if (pthread_mutex_lock(data->eat_count_lock) == 0)
+				data->eat_count--;
+			pthread_mutex_unlock(data->eat_count_lock);
 			is_sleep(data->args->time_to_eat);
 			pthread_mutex_unlock(data->left_fork);
 			pthread_mutex_unlock(data->right_fork);

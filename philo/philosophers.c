@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:16:55 by aabdou            #+#    #+#             */
-/*   Updated: 2022/04/13 13:20:43 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/27 13:08:07 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,17 @@ int	init_philo(t_all *info)
 		return (1);
 	while (i < info->data->nb_of_philo)
 	{
+		info->philo[i].last_meal_lock = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+		info->philo[i].flag_lock = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+		info->philo[i].eat_count_lock = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
+		if (!info->philo[i].last_meal_lock)
+			return (1);
+		if (pthread_mutex_init(info->philo->last_meal_lock, NULL) != 0)
+			return (put_err("Error : Mutex not initialized", false), 1);
+		if (pthread_mutex_init(info->philo->flag_lock, NULL) != 0)
+			return (put_err("Error : Mutex not initialized", false), 1);
+		if (pthread_mutex_init(info->philo->eat_count_lock, NULL) != 0)
+			return (put_err("Error : Mutex not initialized", false), 1);
 		info->philo[i].philo_id = i + 1;
 		info->philo[i].last_meal = 0;
 		info->philo[i].eat_count = info->data->nb_of_meals;

@@ -6,7 +6,7 @@
 /*   By: aabdou <aabdou@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:11:26 by aabdou            #+#    #+#             */
-/*   Updated: 2022/04/13 12:03:03 by aabdou           ###   ########.fr       */
+/*   Updated: 2022/08/27 13:06:58 by aabdou           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,6 +40,9 @@ typedef struct data
 
 typedef struct philo
 {
+	pthread_mutex_t	*last_meal_lock;
+	pthread_mutex_t	*flag_lock;
+	pthread_mutex_t	*eat_count_lock;
 	int				philo_id;
 	int				eat_count;
 	long			start_time;
